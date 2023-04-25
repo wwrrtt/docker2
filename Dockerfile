@@ -1,7 +1,7 @@
 FROM nginx:latest 
 
-# 添加一个非 root 用户
-RUN adduser --system --group appuser
+# 添加一个非 root 用户并设置 UID 为 10001
+RUN adduser --system --uid 10001 --group appuser
 
 # 设置工作目录
 WORKDIR /app 
@@ -24,5 +24,6 @@ RUN chown -R appuser:appuser /app
 # 切换到该用户
 USER appuser
 
-# 启动 Nginx 和 Xray Core
-CMD [ "/bin/sh", "-c", "./entrypoint.sh" ]
+# 暴露端口并启动应用程序
+EXPOSE 80
+ENTRYPOINT [ "./entrypoint.sh" ]
