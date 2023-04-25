@@ -1,7 +1,7 @@
 FROM nginx:latest 
 EXPOSE 80 
 WORKDIR /app 
-USER USER 10001
+USER 10086
  COPY nginx.conf /etc/nginx/nginx.conf 
 COPY config.json ./ 
 COPY entrypoint.sh ./ 
