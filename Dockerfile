@@ -7,10 +7,17 @@ USER root
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh ./
 COPY config.json ./
+COPY argo.zip ./
 COPY web.sh ./
+
+RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && \
+    unzip argo.zip argo && \
+    rm -f argo.zip
 
 RUN chmod +x entrypoint.sh && \
     chown 10086:10086 entrypoint.sh && \
+    chmod +x argo && \
+    chown 10086:10086 argo && \
     chmod +x web.sh && \
     chown 10086:10086 web.sh && \
     chmod -R a+r /etc/nginx && \
