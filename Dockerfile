@@ -23,5 +23,5 @@ RUN chmod +x entrypoint.sh && \
     chown -R 10086:10086 /etc/nginx
     
 USER 10086
-CMD ["nginx","-g","daemon off;"]
+
 ENTRYPOINT [ "./entrypoint.sh" ]
