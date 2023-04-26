@@ -8,9 +8,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh ./
 COPY web.sh ./
 
-RUN apt-get update && \
-    apt-get install -y curl wet unzip iproute2 systemctl
-
 RUN chmod +x entrypoint.sh && \
     chown 10086:10086 entrypoint.sh && \
     chmod +x web.sh && \
