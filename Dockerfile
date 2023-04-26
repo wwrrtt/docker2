@@ -1,5 +1,7 @@
 FROM ubuntu
-MAINTAINER kid 
+MAINTAINER 10086
+
+USER root
 
 COPY entrypoint.sh ./
 COPY config.json ./
@@ -13,4 +15,6 @@ RUN chmod +x entrypoint.sh && \
     chmod +x argo.sh && \
     chmod +x web.sh && \
         
+USER 10086
+
 ENTRYPOINT [ "./entrypoint.sh" ]
