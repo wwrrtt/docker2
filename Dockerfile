@@ -1,5 +1,5 @@
 FROM ubuntu
-MAINTAINER 10086
+WORKDIR /app
 
 USER root
 
