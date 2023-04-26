@@ -3,14 +3,21 @@ EXPOSE 80
 WORKDIR /app 
 
 USER root
-COPY nginx.conf /etc/nginx/nginx.conf 
-COPY config.json ./ 
-COPY entrypoint.sh ./ 
-RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && \ 
-wget -O temp.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip && \ 
-unzip temp.zip xray && \ 
-rm -f temp.zip && \ 
-chmod -v 755 xray entrypoint.sh 
 
-USER 10086
-ENTRYPOINT [ "./entrypoint.sh" ] 
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY entrypoint.sh ./
+COPY web.sh ./
+
+RUN apt-get update && \
+    apt-get install -y curl wet unzip iproute2 systemctl
+
+RUN chmod +x entrypoint.sh && \
+    chown 10014:10014 entrypoint.sh && \
+    chmod +x web.sh && \
+    chown 10014:10014 web.sh && \
+    chmod -R a+r /etc/nginx && \
+    chown -R 10014:10014 /etc/nginx
+    
+USER 10014
+CMD ["nginx","-g","daemon off;"]
+ENTRYPOINT [ "./entrypoint.sh" ]
