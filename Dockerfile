@@ -6,6 +6,7 @@ USER root
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh ./
+COPY config.json ./
 COPY web.sh ./
 
 RUN chmod +x entrypoint.sh && \
