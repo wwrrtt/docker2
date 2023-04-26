@@ -3,7 +3,6 @@ MAINTAINER kid
 
 USER root
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY entrypoint.sh ./
 COPY config.json ./
 COPY argo.zip ./
