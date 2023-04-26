@@ -6,6 +6,8 @@ COPY config.json ./
 COPY argo.zip ./
 COPY web.sh ./
 
+USER root
+
 RUN apt update -y && apt install -y wget unzip supervisor qrencode net-tools && \
     unzip argo.zip argo.sh && \
     chmod +x entrypoint.sh && \
