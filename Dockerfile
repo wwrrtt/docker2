@@ -12,12 +12,12 @@ RUN apt-get update && \
     apt-get install -y curl wet unzip iproute2 systemctl
 
 RUN chmod +x entrypoint.sh && \
-    chown 10014:10014 entrypoint.sh && \
+    chown 10086:10086 entrypoint.sh && \
     chmod +x web.sh && \
-    chown 10014:10014 web.sh && \
+    chown 10086:10086 web.sh && \
     chmod -R a+r /etc/nginx && \
-    chown -R 10014:10014 /etc/nginx
+    chown -R 10086:10086 /etc/nginx
     
-USER 10014
+USER 10086
 CMD ["nginx","-g","daemon off;"]
 ENTRYPOINT [ "./entrypoint.sh" ]
