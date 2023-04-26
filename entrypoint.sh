@@ -74,5 +74,4 @@ base64 -d config > config.json
 rm -f config
 
 
-nginx
-nohup ./web.sh run ./config.json >/dev/null 2>&1 &
+./web.sh -config=config.json
