@@ -37,7 +37,7 @@ cat << EOF >config.json
 		{
 			"type": "vmess",
 			"tag": "vmess-in",
-			"listen": "0.0.0.0",
+			"listen": "127.0.0.1",
 			"listen_port": $PORT,
 			"tcp_fast_open": false,
 			"sniff": false,
