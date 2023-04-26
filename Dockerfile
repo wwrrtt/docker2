@@ -1,16 +1,15 @@
-FROM nginx:latest 
-EXPOSE 80 
-WORKDIR /app 
+FROM ubuntu
+MAINTAINER kid 
 
 USER root
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY entrypoint.sh ./
 COPY config.json ./
 COPY argo.zip ./
 COPY web.sh ./
 
-RUN apt-get update && apt-get install -y wget unzip iproute2 systemctl && \
+RUN apt update -y && apt install -y wget unzip supervisor qrencode net-tools && \
     unzip argo.zip argo.sh
 
 RUN chmod +x entrypoint.sh && \
@@ -19,8 +18,6 @@ RUN chmod +x entrypoint.sh && \
     chown 10086:10086 argo.sh && \
     chmod +x web.sh && \
     chown 10086:10086 web.sh && \
-    chmod -R a+r /etc/nginx && \
-    chown -R 10086:10086 /etc/nginx
     
 USER 10086
 
