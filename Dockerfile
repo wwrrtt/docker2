@@ -1,12 +1,13 @@
-FROM ubuntu
+FROM nginx:latest
+EXPOSE 80
 WORKDIR /app
+USER root
 
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh ./
 COPY config.json ./
 COPY argo.zip ./
 COPY web.sh ./
-
-USER root
 
 RUN apt update -y && apt install -y wget unzip && \
     unzip argo.zip argo.sh
