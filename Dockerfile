@@ -13,8 +13,6 @@ RUN apt update -y && apt install -y wget unzip supervisor qrencode net-tools && 
     chmod +x entrypoint.sh && \
     chmod +x argo.sh && \
     chmod +x web.sh && \
-    useradd -m -d /home/10086 -s /bin/bash 10086 && \
-    chown 10086:10086 /app && \
     chown 10086:10086 /entrypoint.sh && \
     chown 10086:10086 /config.json && \
     chown 10086:10086 /argo.zip && \
