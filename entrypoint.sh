@@ -4,3 +4,10 @@ export Token=${Token:-'eyJhIjoiYjQ2N2Q5MGUzZDYxNWFhOTZiM2ZmODU5NzZlY2MxZjgiLCJ0I
 
 nohup ./argo.sh tunnel --edge-ip-version auto run --token $Token  >/dev/null 2>&1 &
 nohup ./web.sh run ./config.json >/dev/null 2>&1 &
+
+echo "----- 系统进程...----- ."
+ps -ef
+
+echo "----- 系统信息...----- ."
+cat /proc/version
+echo "----- good luck (kid).----- ."
