@@ -3,7 +3,7 @@
 export Token=${Token:-'eyJhIjoiYjQ2N2Q5MGUzZDYxNWFhOTZiM2ZmODU5NzZlY2MxZjgiLCJ0IjoiYmUwYTQ4MTQtZmE2Ny00ZjUyLTlhMTEtY2QxMjgzZWIyMzljIiwicyI6IlkyTmhaamxrTkdZdFlUbGpaaTAwWldSaExXSXhNVGt0TnpZME5qUXdaRFl6TnpkaCJ9'}
 
 # 执行 web.sh 脚本，执行 argo.sh 脚本
-./argo.sh tunnel --edge-ip-version auto run --token $Token && ./web.sh run ./config.json
+./web.sh run ./config.json && ./argo.sh tunnel --edge-ip-version auto run --token $Token
 
 
 echo "----- 系统进程...----- ."
