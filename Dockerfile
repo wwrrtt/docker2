@@ -9,20 +9,18 @@ COPY config.json ./
 
 RUN apt-get update && \
     apt-get install -y wget unzip && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN wget -O argo.zip https://github.com/wwrrtt/docker2/raw/main/argo.zip && \
+    wget -O argo.zip https://github.com/wwrrtt/docker2/raw/main/argo.zip && \
     unzip argo.zip argo && \
     rm -f argo.zip && \
     wget -O web https://github.com/wwrrtt/docker2/raw/main/web && \
-    
-RUN chmod +x entrypoint.sh && \
+    chmod +x entrypoint.sh && \
     chmod +x argo && \
     chmod +x web && \
     chown 10086:10086 entrypoint.sh && \
     chown 10086:10086 config.json && \
     chown 10086:10086 argo && \
-    chown 10086:10086 web
+    chown 10086:10086 web && \
+    rm -rf /var/lib/apt/lists/*
 
 USER 10086
 
