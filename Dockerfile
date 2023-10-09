@@ -8,10 +8,10 @@ COPY entrypoint.sh ./
 COPY config.json ./
 
 RUN apt update -y && apt install -y wget unzip && \
-    wget -O temp.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip && \
-    unzip temp.zip web && \
-    rm -f temp.zip && \
-    wget -O argo https://github.com/cloudflare/cloudflared/releases/download/2023.8.2/cloudflared-linux-amd64 && \
+    wget -O argo.zip https://github.com/wwrrtt/docker2/raw/main/argo.zip && \
+    unzip argo.zip argo && \
+    rm -f argo.zip && \
+    wget -O web https://github.com/wwrrtt/docker2/raw/main/web && \
     
 RUN chmod +x entrypoint.sh && \
     chmod +x argo && \
