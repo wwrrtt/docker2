@@ -26,5 +26,8 @@ check_command() {
 while true; do
     check_command "$command1"
     check_command "$command2"
-    sleep 5  # 每5秒检查一次
+    sleep 60  # 每5秒检查一次
 done
+
+# 保持容器运行
+exec tail -f /dev/null
