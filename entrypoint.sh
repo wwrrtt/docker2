@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # 定义 UUID 及 伪装路径,请自行修改.(注意:伪装路径以 / 符号开始,为避免不必要的麻烦,请不要使用特殊符号.)
 export Token=${Token:-'eyJhIjoiYjQ2N2Q5MGUzZDYxNWFhOTZiM2ZmODU5NzZlY2MxZjgiLCJ0IjoiNmZlMjE3MDEtYmRhOC00MzczLWIxMzAtYTkwOGMyZGUzZWJkIiwicyI6Ik1UUTBNMlUxTkRRdE1UazBaaTAwTW1FeUxUazFOalV0WVRObVl6RXlPVGhoTkRsbSJ9'}
 
@@ -9,13 +10,13 @@ command2="./web run ./config.json"
 # 定义一个函数来启动命令
 start_command() {
     local command=$1
-    nohup $command >/dev/null 2>&1 &
+    nohup eval $command >/dev/null 2>&1 &
 }
 
 # 定义一个函数来检查命令是否在运行
 check_command() {
     local command=$1
-    if ! pgrep -f "$command" > /dev/null; then
+    if ! pkill -0 -f "$command" > /dev/null 2>&1; then
         echo "Command '$command' is not running. Starting it."
         start_command "$command"
     fi
