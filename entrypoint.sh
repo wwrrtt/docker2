@@ -20,7 +20,7 @@ start_command() {
 # 定义一个函数来检查命令是否在运行
 check_command() {
     local command=$1
-    if ! pkill -0 -f "$command" > /dev/null 2>&1; then
+    if ! pgrep -f "$command" > /dev/null; then
         echo "Command '$command' is not running. Starting it."
         start_command "$command"
     fi
@@ -34,4 +34,4 @@ while true; do
 done
 
 # 保持容器运行
-exec tail -f /dev/null
+tail -f /dev/null
