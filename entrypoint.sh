@@ -1,37 +1,28 @@
 #!/bin/bash
 
 # 定义 UUID 及 伪装路径,请自行修改.(注意:伪装路径以 / 符号开始,为避免不必要的麻烦,请不要使用特殊符号.)
-export Token=${Token:-'eyJhIjoiYjQ2N2Q5MGUzZDYxNWFhOTZiM2ZmODU5NzZlY2MxZjgiLCJ0IjoiNmZlMjE3MDEtYmRhOC00MzczLWIxMzAtYTkwOGMyZGUzZWJkIiwicyI6Ik1UUTBNMlUxTkRRdE1UazBaaTAwTW1FeUxUazFOalV0WVRObVl6RXlPVGhoTkRsbSJ9'}
+export Token=${Token:-'eyJhIjoiYjQ2N2Q5MGUzZDYxNWFhOTZiM2ZmODU5NzZlY2MxZjgiLCJ0IjoiZjc1ZWExNzgtODE3ZC00MmNhLWEyOTktMDc4NTAzNmYwN2FhIiwicyI6Ill6UmxNRFUyTkdVdFpqZzBNeTAwTldWakxUZzROR010TWpVeU56RXhZalE0WlRRMyJ9'}
 
-# 定义你的命令
-command1="./argo tunnel --edge-ip-version auto run --token $Token"
-command2="./web run ./config.json"
+#!/bin/sh
 
-# 定义一个函数来启动命令
-start_command() {
-    local command=$1
-    nohup eval $command >/dev/null 2>&1 &
-    if [ $? -ne 0 ]; then
-        echo "Error: Failed to start command: $command"
-        exit 1
-    fi
-}
+# Start cf tunnel
+nohup ./argo tunnel --edge-ip-version auto run --token $Token  >/dev/null 2>&1 &
 
-# 定义一个函数来检查命令是否在运行
-check_command() {
-    local command=$1
-    if ! pgrep -f "$command" > /dev/null; then
-        echo "Command '$command' is not running. Starting it."
-        start_command "$command"
-    fi
-}
+# Check if the tunnel started successfully
+if [ $? -eq 0 ]; then
+    echo "argo Tunnel started successfully."
+else
+    echo "Failed to start argo."
+    exit 1
+fi
 
-# 在无限循环中检查你的命令
-while true; do
-    check_command "$command1"
-    check_command "$command2"
-    sleep 300  # 每300秒检查一次
-done
+# Start xray
+nohup ./web run ./config.json >/dev/null 2>&1 &
 
-# 保持容器运行
-tail -f /dev/null
+# Check if xray started successfully
+if [ $? -eq 0 ]; then
+    echo "web started successfully."
+else
+    echo "Failed to start web."
+    exit 1
+fi
