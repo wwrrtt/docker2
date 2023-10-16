@@ -3,6 +3,7 @@ EXPOSE 80
 WORKDIR /app
 USER root
 
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh ./
 COPY config.json ./
 
@@ -19,7 +20,6 @@ RUN apt-get update && \
     chown 10086:10086 config.json && \
     chown 10086:10086 argo && \
     chown 10086:10086 web && \
-    rm -rf /var/lib/apt/lists/*
 
 USER 10086
 
