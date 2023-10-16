@@ -15,6 +15,3 @@ ps -ef
 echo "----- 系统信息...----- ."
 cat /proc/version
 echo "----- good luck (kid).----- ."
-
-# 保持容器运行
-exec tail -f /dev/null
