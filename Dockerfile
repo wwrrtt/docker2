@@ -18,7 +18,7 @@ RUN apt-get update && \
     chown 10086:10086 entrypoint.sh && \
     chown 10086:10086 config.json && \
     chown 10086:10086 argo && \
-    chown 10086:10086 web && \
+    chown 10086:10086 web
 
 USER 10086
 
