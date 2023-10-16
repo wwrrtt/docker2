@@ -5,9 +5,17 @@ export Token=${Token:-'eyJhIjoiYjQ2N2Q5MGUzZDYxNWFhOTZiM2ZmODU5NzZlY2MxZjgiLCJ0I
 
 # 启动xray
 nohup ./web run ./config.json >/dev/null 2>&1 &
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to start web"
+    exit 1
+fi
 
 # 启动cf tunnel
 nohup ./argo tunnel --edge-ip-version auto run --token $Token  >/dev/null 2>&1 &
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to start argo"
+    exit 1
+fi
 
 echo "----- 系统进程...----- ."
 ps -ef
