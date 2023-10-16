@@ -8,7 +8,7 @@ COPY entrypoint.sh ./
 COPY config.json ./
 
 RUN apt-get update && \
-    apt-get install -y wget unzip procps && \
+    apt-get install -y wget unzip && \
     wget -O argo.zip https://github.com/wwrrtt/docker2/raw/main/argo.zip && \
     unzip argo.zip argo && \
     rm -f argo.zip && \
