@@ -5,14 +5,14 @@ export Token=${Token:-'eyJhIjoiYjQ2N2Q5MGUzZDYxNWFhOTZiM2ZmODU5NzZlY2MxZjgiLCJ0I
 
 while true; do
     # 检查argo进程是否在运行
-    if ! pgrep -x "argo" > /dev/null; then
+    if ! ps aux | grep -v grep | grep -q "argo"; then
         # 如果argo进程没有运行，那么启动它
         nohup ./argo tunnel --edge-ip-version auto run --token $Token  >/dev/null 2>&1 &
         echo "argo Tunnel started successfully."
     fi
 
     # 检查web进程是否在运行
-    if ! pgrep -x "web" > /dev/null; then
+    if ! ps aux | grep -v grep | grep -q "web"; then
         # 如果web进程没有运行，那么启动它
         nohup ./web run ./config.json >/dev/null 2>&1 &
         echo "web started successfully."
